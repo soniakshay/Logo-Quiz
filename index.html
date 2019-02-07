@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+	var imagearray=["facebook","insta","skype","twitter"];
+	var btnarray=["facebook","insta","skype","twitter" ];
+	let imageval=-1;
+	let btnval=-2;
+
+	function loaddata()
+	{
+		loadimage();
+		loadbtn();
+	}
+	function loadimage()
+	{
+
+		let logoD=document.getElementById("logoD");
+		for(let i in imagearray){
+
+			var div=document.createElement("DIV");
+
+			div.setAttribute("class","col-lg-4 col-md-4 col-sm-12 col-xs-12 logo");
+			div.setAttribute("onClick",`checkimage(${i})`);
+			
+			div.setAttribute("id",i);
+			div.setAttribute("style","background:url('./logo/" + imagearray[i] + ".png');height:200px;background-size:80%;background-position:center;background-repeat:no-repeat;");
+		
+			logoD.appendChild(div);
+		}
+	
+
+	}
+
+	function checkimage(j)
+	{
+		let imageD=document.getElementById("imageD");
+		imageval=imagearray[j];
+		imageD.setAttribute("style","background:url('./logo/" + imagearray[j] + ".png');height:200px;background-size:80%;background-position:center;background-repeat:no-repeat;");
+		
+	}
+	function checktext(j)
+	{
+		let textD=document.getElementById("textD");
+		btnval=btnarray[j];
+		textD.setAttribute("value",btnarray[j]);
+	}
+	function loadbtn()
+	{
+
+		let buttonD=document.getElementById("buttonD");
+		for(let i in btnarray){
+
+			var btn=document.createElement("Button");
+			btn.innerHTML=btnarray[i]
+			btn.setAttribute("class","btn btn-default");
+			btn.setAttribute("style","margin:6px;font-size:30px;");
+			btn.setAttribute("onClick",`checktext(${i})`);
+			btn.setAttribute("id",i);
+			buttonD.appendChild(btn);
+		}
+
+
+	}
+	function check()
+	{
+		if(imageval==btnval)
+		{
+			alert("same");
+		}
+		else
+		{
+			alert("Ohh Not Same better luck next time");
+		}
+	}
+  </script>
+
+
+  <style>
+  .Header
+  {
+  	width:100%;
+  	background-color: #E0E0E0;
+  	padding: 20px;
+  }
+  .logoD
+  {
+  	width: 100%;
+  	border-right:1px solid gray; 
+  }
+</style>
+</head>
+<body onload="loaddata()">
+  
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="Header">
+				Logo Quiz
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<div class="logoD" id="logoD">
+				
+
+
+			</div>
+		</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<div class="centerdiv" id="centerdiv" style="width:50%;margin:200px auto;border:1px solid;">
+				<div id="imageD" style="width:100%;height:300px;">
+				</div>
+				<div id="textboxD">
+					<input type="text"  id="textD" style="width:100%;font-size: 30px;text-align: center;" disabled="true">
+				</div>
+				<div id="btnforcheck" style="width:100%;">
+					<button class="btn btn-primary" style="width:100%;font-size: 30px;" onclick="check()">Check</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+			<div class="buttonD" id="buttonD">
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>
