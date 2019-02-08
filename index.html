@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Logo Quiz</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="./logo/logo.png" />
@@ -9,8 +9,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script type="text/javascript">
-	var imagearray=["facebook","insta","skype","twitter"];
-	var btnarray=["facebook","insta","skype","twitter" ];
+	var imagearray=["Facebook","Insta","Skype","Twitter","Hike","Picsart","Pinterest","Snapchat","Tinder","Wechat"];
+	var btnarray=["Facebook","Insta","Skype","Twitter","Hike","Picsart","Pinterest","Snapchat","Tinder","Wechat"];
 	let imageval=-1;
 	let btnval=-2;
 
@@ -27,11 +27,11 @@
 
 			var div=document.createElement("DIV");
 
-			div.setAttribute("class","col-lg-4 col-md-4 col-sm-12 col-xs-12 logo");
+			div.setAttribute("class","col-lg-6 col-md-6 col-sm-12 col-xs-12 logo");
 			div.setAttribute("onClick",`checkimage(${i})`);
 			
 			div.setAttribute("id",i);
-			div.setAttribute("style","background:url('./logo/" + imagearray[i] + ".png');height:200px;background-size:80%;background-position:center;background-repeat:no-repeat;");
+			div.setAttribute("style","background:url('./logo/" + imagearray[i] + ".png');height:300px;background-size:75%;background-position:center;background-repeat:no-repeat;");
 		
 			logoD.appendChild(div);
 		}
@@ -43,31 +43,14 @@
 	{
 		let imageD=document.getElementById("imageD");
 		imageval=imagearray[j];
-		imageD.setAttribute("style","background:url('./logo/" + imagearray[j] + ".png');height:200px;background-size:80%;background-position:center;background-repeat:no-repeat;");
+		imageD.setAttribute("style","background:url('./logo/" + imagearray[j] + ".png');height:300px;background-size:cover;background-position:center;background-repeat:no-repeat;");
 		
 	}
 	function checktext(j)
 	{
 		let textD=document.getElementById("textD");
-		btnval=btnarray[j];
-		textD.setAttribute("value",btnarray[j]);
-	}
-	function loadbtn()
-	{
-
-		let buttonD=document.getElementById("buttonD");
-		for(let i in btnarray){
-
-			var btn=document.createElement("Button");
-			btn.innerHTML=btnarray[i]
-			btn.setAttribute("class","btn btn-default");
-			btn.setAttribute("style","margin:6px;font-size:30px;");
-			btn.setAttribute("onClick",`checktext(${i})`);
-			btn.setAttribute("id",i);
-			buttonD.appendChild(btn);
-		}
-
-
+		btnval=blankArray[j];
+		textD.setAttribute("value",blankArray[j]);
 	}
 	function check()
 	{
@@ -77,18 +60,69 @@
 		}
 		else
 		{
-			alert("Ohh Not Same better luck next time");
+			alert("Ooopsss Wrong Choice...!!!");
 		}
 	}
+	var blankArray;
+	function RandmNo(){
+		var len= imagearray.length;
+		blankArray=new Array();
+		let j =0;
+		
+		while(j < len)
+		{
+			ranNo=Math.floor((Math.random() * len));
+			if(blankArray.indexOf(btnarray[ranNo]) == -1 )
+			{
+				blankArray.push(btnarray[ranNo]);
+
+			}
+			else
+			{
+				ranNo=Math.floor((Math.random() * len));
+				while(blankArray.indexOf(btnarray[ranNo]) != -1)
+				{
+						ranNo=Math.floor((Math.random() * len));
+					
+				}	
+				blankArray.push(btnarray[ranNo]);
+
+			}
+			
+			j++;
+		}
+	}
+
+	function loadbtn()
+	{
+		RandmNo();
+		let buttonD=document.getElementById("buttonD");
+		for(let i in blankArray){
+
+			var btn=document.createElement("Button");
+			btn.innerHTML=blankArray[i];	
+			btn.setAttribute("class","btn btn-default");
+			btn.setAttribute("style","margin:20px;font-size:30px;padding:30px;background-color:black;color:yellow;width:250px;");
+			btn.setAttribute("onClick",`checktext(${i})`);
+			btn.setAttribute("id",i);
+			buttonD.appendChild(btn);
+		}
+
+
+	}
+	
   </script>
 
 
   <style>
   .Header
   {
-  	width:100%;
-  	background-color: #E0E0E0;
+  	width:30%;
+  	background-color: black;
+  	color: gold;
+  	font-size: 30px;
   	padding: 20px;
+
   }
   .logoD
   {
@@ -97,31 +131,32 @@
   }
 </style>
 </head>
-<body onload="loaddata()">
+<body onload="loaddata()" style="background-color:black; color: black;">
   
 <div class="container-fluid">
+	<center>
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="Header">
-				Logo Quiz
+				<marquee behavior="alternate" direction="Right" scrollamount="30">Logo Quiz</marquee>
 			</div>
 		</div>
 	</div>
-
+	</center>
 	<div class="row">
 		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-			<div class="logoD" id="logoD">
+			<div class="logoD" id="logoD" style="height: 800px; overflow: scroll;">
 				
 
 
 			</div>
 		</div>
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-			<div class="centerdiv" id="centerdiv" style="width:50%;margin:200px auto;border:1px solid;">
-				<div id="imageD" style="width:100%;height:300px;">
+			<div class="centerdiv" id="centerdiv" style="width:50%;margin:200px auto;height: 410px;">
+				<div id="imageD" style="width:100%;height:300px;border:2px solid yellow;">
 				</div>
 				<div id="textboxD">
-					<input type="text"  id="textD" style="width:100%;font-size: 30px;text-align: center;" disabled="true">
+					<input type="text"  id="textD" style="width:100%;font-size: 30px;text-align: center;border:1px solid green;">
 				</div>
 				<div id="btnforcheck" style="width:100%;">
 					<button class="btn btn-primary" style="width:100%;font-size: 30px;" onclick="check()">Check</button>
